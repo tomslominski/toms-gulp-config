@@ -8,7 +8,7 @@ Run `npm run watch` to watch files as they are edited.
 
 Run `npm run prod` to build file ready for upload into production.
 
-## Included tools
+## Included tools
 
 SASS files are generated from `src/sass/style.scss` and `src/sass/admin.scss` into `assets/css/style.css` and `assets/css/admin.css`. Autoprefixer is always used, CleanCSS is used in production, and sourcemaps are generated when not in production.
 
