@@ -1,0 +1,45 @@
+{
+  "name": "gulp-config",
+  "version": "1.0.0",
+  "description": "Default gulp config for projects.",
+  "main": "gulpfile.esm.js",
+  "scripts": {
+    "watch": "gulp",
+    "prod": "gulp build --prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomslominski/gulp-config.git"
+  },
+  "keywords": [
+    "gulp",
+    "gulp-tasks"
+  ],
+  "author": "Tom Slominski <tom@slomin.ski>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomslominski/gulp-config/issues"
+  },
+  "homepage": "https://github.com/tomslominski/gulp-config#readme",
+  "devDependencies": {
+    "@babel/core": "^7.8.6",
+    "@babel/preset-env": "^7.8.6",
+    "@babel/register": "^7.8.6",
+    "autoprefixer": "^9.7.4",
+    "del": "^5.1.0",
+    "esm": "^3.2.25",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-if": "^3.0.0",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2"
+  },
+  "browserslist": [
+    "defaults"
+  ]
+}
