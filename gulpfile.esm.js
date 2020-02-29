@@ -45,13 +45,20 @@ export const scripts = () => {
 	.pipe(dest('assets/js'));
 }
 
+export const icons = () => {
+	return src('src/icons/**/*.svg', {allowEmpty: true})
+	.pipe(gulpif(PRODUCTION, imagemin()))
+	.pipe(dest('assets/icons'));
+}
+
 export const watchChanges = () => {
 	watch('src/sass/**/*.scss', styles);
 	watch('src/images/**/*.{jpg,jpeg,png,svg,gif}', images);
 	watch(['src/**/*','!src/{images,js,scss}','!src/{images,js,sass}/**/*'], copy);
 	watch('src/js/**/*.js', scripts);
+	watch('src/icons/**/*.svg', icons);
 }
 
-export const dev = series(clean, parallel(styles, images, copy, scripts), watchChanges);
-export const build = series(clean, parallel(styles, images, copy, scripts));
+export const dev = series(clean, parallel(styles, images, copy, scripts, icons), watchChanges);
+export const build = series(clean, parallel(styles, images, copy, scripts, icons));
 export default dev;
