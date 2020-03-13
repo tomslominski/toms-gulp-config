@@ -10,15 +10,18 @@ import imagemin from 'gulp-imagemin';
 import del from 'del';
 import babel from 'gulp-babel';
 import uglify from 'gulp-uglify';
+import fiber from 'fibers';
 
 const PRODUCTION = yargs.argv.prod;
+
+sass.compiler = require('sass');
 
 export const clean = () => del(['assets']);
 
 export const styles = () => {
 	return src(['src/sass/style.scss', 'src/sass/admin.scss'], {allowEmpty: true})
 	.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
-	.pipe(sass().on('error', sass.logError))
+	.pipe(sass({fiber: fiber}).on('error', sass.logError))
 	.pipe(postcss([ autoprefixer ]))
 	.pipe(gulpif(PRODUCTION, cleanCss()))
 	.pipe(gulpif(!PRODUCTION, sourcemaps.write('.')))
