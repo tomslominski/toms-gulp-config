@@ -5,7 +5,9 @@
   "main": "gulpfile.esm.js",
   "scripts": {
     "watch": "gulp",
-    "prod": "gulp build --prod"
+    "prod": "gulp build --prod",
+    "postinstall": "node scripts/install.js",
+    "postuninstall": "node scripts/uninstall.js"
   },
   "repository": {
     "type": "git",
