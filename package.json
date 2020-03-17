@@ -1,11 +1,9 @@
 {
   "name": "gulp-config",
   "version": "1.0.0",
-  "description": "Default gulp config for projects.",
+  "description": "Gulp config for projects used for compiling JS, SCSS, and optimising images.",
   "main": "gulpfile.esm.js",
   "scripts": {
-    "watch": "gulp",
-    "prod": "gulp build --prod",
     "postinstall": "node scripts/install.js",
     "postuninstall": "node scripts/uninstall.js"
   },
@@ -27,7 +25,6 @@
     "@babel/core": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
     "@babel/register": "^7.8.6",
-    "@ianwalter/merge": "^7.0.0",
     "autoprefixer": "^9.7.4",
     "del": "^5.1.0",
     "esm": "^3.2.25",
@@ -46,5 +43,9 @@
   },
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "dependencies": {
+    "colors": "^1.4.0",
+    "@ianwalter/merge": "^7.0.0"
+  }
 }
