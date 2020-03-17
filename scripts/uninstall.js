@@ -5,9 +5,9 @@ const colors = require('colors');
 const packagePath = path.join(process.env.INIT_CWD, 'package.json');
 let packageFile = fs.existsSync(packagePath) ? JSON.parse(fs.readFileSync(packagePath)) : {};
 const scripts = {
-	watch: 'gulp',
-	dev: 'gulp build',
-	prod: 'gulp build --prod',
+	watch: 'gulp --gulpfile=node_modules/toms-gulp-config/gulpfile.esm.js',
+	dev: 'gulp build --gulpfile=node_modules/toms-gulp-config/gulpfile.esm.js',
+	prod: 'gulp build --prod --gulpfile=node_modules/toms-gulp-config/gulpfile.esm.js',
 };
 
 Object.keys(scripts).forEach((command) => {
