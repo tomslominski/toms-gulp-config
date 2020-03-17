@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tomslominski/gulp-config.git"
+    "url": "git+https://github.com/tomslominski/toms-gulp-config.git"
   },
   "keywords": [
     "gulp",
@@ -18,9 +18,9 @@
   "author": "Tom Slominski <tom@slomin.ski>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tomslominski/gulp-config/issues"
+    "url": "https://github.com/tomslominski/toms-gulp-config/issues"
   },
-  "homepage": "https://github.com/tomslominski/gulp-config#readme",
+  "homepage": "https://github.com/tomslominski/toms-gulp-config#readme",
   "devDependencies": {
     "@babel/core": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
