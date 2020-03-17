@@ -40,26 +40,26 @@ Alternatively, if these default directories do not suit your project, you can cr
 
 ```
 {
-	input: {
-		styles: ['src/sass/style.scss', 'src/sass/admin.scss'],
-		images: 'src/images/**/*.{jpg,jpeg,png,svg,gif}',
-		copy: ['src/**/*', '!src/{images,js,sass}', '!src/{images,js,sass}/**/*'],
-		scripts: ['src/js/app.js', 'src/js/admin.js'],
-		icons: 'src/icons/**/*.svg',
-	},
-	output: {
-		styles: 'assets/css',
-		images: 'assets/images',
-		copy: 'assets',
-		scripts: 'assets/js',
-		icons: 'assets/icons',
-	},
-	watch: {
-		styles: 'src/sass/**/*.scss',
-		images: 'src/images/**/*.{jpg,jpeg,png,svg,gif}',
-		copy: ['src/**/*','!src/{images,js,scss}', '!src/{images,js,sass}/**/*'],
-		scripts: 'src/js/**/*.js',
-		icons: 'src/icons/**/*.svg'
-	}
+  input: {
+    styles: ['src/sass/style.scss', 'src/sass/admin.scss'],
+    images: 'src/images/**/*.{jpg,jpeg,png,svg,gif}',
+    copy: ['src/**/*', '!src/{images,js,sass}', '!src/{images,js,sass}/**/*'],
+    scripts: ['src/js/app.js', 'src/js/admin.js'],
+    icons: 'src/icons/**/*.svg'
+  },
+  output: {
+    styles: 'assets/css',
+    images: 'assets/images',
+    copy: 'assets',
+    scripts: 'assets/js',
+    icons: 'assets/icons'
+  },
+  watch: {
+    styles: 'src/sass/**/*.scss',
+    images: 'src/images/**/*.{jpg,jpeg,png,svg,gif}',
+    copy: ['src/**/*','!src/{images,js,scss}', '!src/{images,js,sass}/**/*'],
+    scripts: 'src/js/**/*.js',
+    icons: 'src/icons/**/*.svg'
+  }
 }
 ```
