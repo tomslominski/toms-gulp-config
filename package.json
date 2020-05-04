@@ -21,11 +21,16 @@
     "url": "https://github.com/tomslominski/toms-gulp-config/issues"
   },
   "homepage": "https://github.com/tomslominski/toms-gulp-config#readme",
-  "devDependencies": {
+  "browserslist": [
+    "defaults"
+  ],
+  "dependencies": {
     "@babel/core": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
     "@babel/register": "^7.8.6",
+    "@ianwalter/merge": "^7.0.0",
     "autoprefixer": "^9.7.4",
+    "colors": "^1.4.0",
     "del": "^5.1.0",
     "esm": "^3.2.25",
     "fibers": "^4.0.2",
@@ -40,12 +45,5 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "sass": "^1.26.3"
-  },
-  "browserslist": [
-    "defaults"
-  ],
-  "dependencies": {
-    "colors": "^1.4.0",
-    "@ianwalter/merge": "^7.0.0"
   }
 }
