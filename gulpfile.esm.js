@@ -22,26 +22,31 @@ const ROOT = process.env.INIT_CWD;
 const configFile = path.join(ROOT, 'gulp-config.json');
 const configDirs = fs.existsSync(configFile) ? JSON.parse(fs.readFileSync(configFile)) : {};
 const defaultDirs = {
-	input: {
-		styles: ['src/sass/style.scss', 'src/sass/admin.scss'],
-		images: 'src/images/**/*.{jpg,jpeg,png,svg,gif}',
-		copy: ['src/**/*', '!src/{images,js,sass}', '!src/{images,js,sass}/**/*'],
-		scripts: ['src/js/app.js', 'src/js/admin.js'],
-		icons: 'src/icons/**/*.svg',
+	assets: 'assets',
+	styles: {
+		input: ['src/sass/style.scss', 'src/sass/admin.scss'],
+		output: 'assets/css',
+		watch: 'src/sass/**/*.scss'
 	},
-	output: {
-		styles: 'assets/css',
-		images: 'assets/images',
-		copy: 'assets',
-		scripts: 'assets/js',
-		icons: 'assets/icons',
+	images: {
+		input: 'src/images/**/*.{jpg,jpeg,png,svg,gif}',
+		output: 'assets/images',
+		watch: 'src/images/**/*.{jpg,jpeg,png,svg,gif}'
 	},
-	watch: {
-		styles: 'src/sass/**/*.scss',
-		images: 'src/images/**/*.{jpg,jpeg,png,svg,gif}',
-		copy: ['src/**/*','!src/{images,js,scss}', '!src/{images,js,sass}/**/*'],
-		scripts: 'src/js/**/*.js',
-		icons: 'src/icons/**/*.svg'
+	copy: {
+		input: ['src/**/*', '!src/{images,js,sass}', '!src/{images,js,sass}/**/*'],
+		output: 'assets',
+		watch: ['src/**/*','!src/{images,js,scss}', '!src/{images,js,sass}/**/*']
+	},
+	scripts: {
+		input: ['src/js/app.js', 'src/js/admin.js'],
+		output: 'assets/js',
+		watch: 'src/js/**/*.js'
+	},
+	icons: {
+		input: 'src/icons/**/*.svg',
+		output: 'assets/icons',
+		watch: 'src/icons/**/*.svg'
 	}
 };
 let dirs = merge(defaultDirs, configDirs);
@@ -63,50 +68,48 @@ const generateDirectories = (object) => {
 
 generateDirectories(dirs);
 
-export const clean = () => del(['assets']);
+export const clean = () => del(dirs.assets, {force: true});
 
 export const styles = () => {
-	return src(dirs.input.styles, {allowEmpty: true})
+	return src(dirs.styles.input, {allowEmpty: true})
 	.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
 	.pipe(sass({fiber: fiber}).on('error', sass.logError))
 	.pipe(postcss([ autoprefixer ]))
 	.pipe(gulpif(PRODUCTION, cleanCss()))
 	.pipe(gulpif(!PRODUCTION, sourcemaps.write('.')))
-	.pipe(dest(dirs.output.styles));
+	.pipe(dest(dirs.styles.output));
 }
 
 export const images = () => {
-	return src(dirs.input.images, {allowEmpty: true})
+	return src(dirs.images.input, {allowEmpty: true})
 	.pipe(gulpif(PRODUCTION, imagemin()))
-	.pipe(dest(dirs.output.images));
+	.pipe(dest(dirs.images.output));
 }
 
 export const copy = () => {
-	return src(dirs.input.copy, {allowEmpty: true})
-	.pipe(dest(dirs.output.copy));
+	return src(dirs.copy.input, {allowEmpty: true})
+	.pipe(dest(dirs.copy.output));
 }
 
 export const scripts = () => {
-	return src(dirs.input.scripts, {allowEmpty: true})
+	return src(dirs.scripts.input, {allowEmpty: true})
 	.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
 	.pipe(babel({presets: ['@babel/env']}))
 	.pipe(uglify())
 	.pipe(gulpif(!PRODUCTION, sourcemaps.write('.')))
-	.pipe(dest(dirs.output.scripts));
+	.pipe(dest(dirs.scripts.output));
 }
 
 export const icons = () => {
-	return src(dirs.input.icons, {allowEmpty: true})
+	return src(dirs.icons.input, {allowEmpty: true})
 	.pipe(gulpif(PRODUCTION, imagemin()))
-	.pipe(dest(dirs.output.icons));
+	.pipe(dest(dirs.icons.output));
 }
 
 export const watchChanges = () => {
-	watch(dirs.watch.styles, styles);
-	watch(dirs.watch.images, images);
-	watch(dirs.watch.copy, copy);
-	watch(dirs.watch.scripts, scripts);
-	watch(dirs.watch.icons, icons);
+	[styles, images, copy, scripts, icons].forEach(task => {
+		watch(dirs[task.name].watch, task);
+	});
 }
 
 export const dev = series(clean, parallel(styles, images, copy, scripts, icons), watchChanges);
