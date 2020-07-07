@@ -1,6 +1,6 @@
 import { src, dest, watch, series, parallel } from 'gulp';
 import yargs from 'yargs';
-import sass from 'gulp-sass';
+import sass from 'gulp-dart-sass';
 import cleanCss from 'gulp-clean-css';
 import gulpif from 'gulp-if';
 import postcss from 'gulp-postcss';
@@ -14,8 +14,6 @@ import fiber from 'fibers';
 import path from 'path';
 import fs from 'fs';
 import merge from '@ianwalter/merge';
-
-sass.compiler = require('sass');
 
 const PRODUCTION = yargs.argv.prod;
 const ROOT = process.env.INIT_CWD;
