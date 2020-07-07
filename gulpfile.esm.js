@@ -55,13 +55,12 @@ const generateDirectories = (object) => {
 	for (let key in object) {
 		if (typeof object[key] === 'object') {
 			generateDirectories(object[key]);
-		} else {
+		} else if (typeof object[key] === 'string') {
 			if( object[key].charAt(0) === '!' ) {
 				object[key] = '!' + path.join(ROOT, object[key].slice(1));
 			} else {
 				object[key] = path.join(ROOT, object[key]);
 			}
-			
 		}
 	}
 }
@@ -71,6 +70,10 @@ generateDirectories(dirs);
 export const clean = () => del(dirs.assets, {force: true});
 
 export const styles = () => {
+	if (!dirs.styles) {
+		return Promise.resolve(false);
+	}
+	
 	return src(dirs.styles.input, {allowEmpty: true})
 	.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
 	.pipe(sass({fiber: fiber}).on('error', sass.logError))
@@ -81,17 +84,29 @@ export const styles = () => {
 }
 
 export const images = () => {
+	if (!dirs.images) {
+		return Promise.resolve(false);
+	}
+	
 	return src(dirs.images.input, {allowEmpty: true})
 	.pipe(gulpif(PRODUCTION, imagemin()))
 	.pipe(dest(dirs.images.output));
 }
 
 export const copy = () => {
+	if (!dirs.copy) {
+		return Promise.resolve(false);
+	}
+	
 	return src(dirs.copy.input, {allowEmpty: true})
 	.pipe(dest(dirs.copy.output));
 }
 
 export const scripts = () => {
+	if (!dirs.scripts) {
+		return Promise.resolve(false);
+	}
+	
 	return src(dirs.scripts.input, {allowEmpty: true})
 	.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
 	.pipe(babel({presets: ['@babel/env']}))
@@ -101,6 +116,10 @@ export const scripts = () => {
 }
 
 export const icons = () => {
+	if (!dirs.icons) {
+		return Promise.resolve(false);
+	}
+	
 	return src(dirs.icons.input, {allowEmpty: true})
 	.pipe(gulpif(PRODUCTION, imagemin()))
 	.pipe(dest(dirs.icons.output));
@@ -108,8 +127,14 @@ export const icons = () => {
 
 export const watchChanges = () => {
 	[styles, images, copy, scripts, icons].forEach(task => {
+		if (!dirs[task.name]) {
+			return;
+		}
+		
 		watch(dirs[task.name].watch, task);
 	});
+	
+	return Promise.resolve(false);
 }
 
 export const dev = series(clean, parallel(styles, images, copy, scripts, icons), watchChanges);
