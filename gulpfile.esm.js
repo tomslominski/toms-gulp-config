@@ -21,34 +21,7 @@ const PRODUCTION = yargs.argv.prod;
 const ROOT = process.env.INIT_CWD;
 const configFile = path.join(ROOT, 'gulp-config.json');
 const configDirs = fs.existsSync(configFile) ? JSON.parse(fs.readFileSync(configFile)) : {};
-const defaultDirs = {
-	assets: 'assets',
-	styles: {
-		input: ['src/sass/style.scss', 'src/sass/admin.scss'],
-		output: 'assets/css',
-		watch: 'src/sass/**/*.scss'
-	},
-	images: {
-		input: 'src/images/**/*.{jpg,jpeg,png,svg,gif}',
-		output: 'assets/images',
-		watch: 'src/images/**/*.{jpg,jpeg,png,svg,gif}'
-	},
-	copy: {
-		input: ['src/**/*', '!src/{images,js,sass}', '!src/{images,js,sass}/**/*'],
-		output: 'assets',
-		watch: ['src/**/*','!src/{images,js,scss}', '!src/{images,js,sass}/**/*']
-	},
-	scripts: {
-		input: ['src/js/app.js', 'src/js/admin.js'],
-		output: 'assets/js',
-		watch: 'src/js/**/*.js'
-	},
-	icons: {
-		input: 'src/icons/**/*.svg',
-		output: 'assets/icons',
-		watch: 'src/icons/**/*.svg'
-	}
-};
+const defaultDirs = JSON.parse(fs.readFileSync('gulp-config.json'));
 let dirs = merge(defaultDirs, configDirs);
 
 const generateDirectories = (object) => {
