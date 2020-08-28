@@ -1,28 +1,32 @@
 {
-	"assets": "assets",
 	"styles": {
 		"input": ["src/sass/style.scss", "src/sass/admin.scss"],
 		"output": "assets/css",
-		"watch": "src/sass/**/*.scss"
+		"watch": "src/sass/**/*.scss",
+		"delete": true
 	},
 	"images": {
 		"input": "src/images/**/*.{jpg,jpeg,png,svg,gif}",
 		"output": "assets/images",
-		"watch": "src/images/**/*.{jpg,jpeg,png,svg,gif}"
+		"watch": "src/images/**/*.{jpg,jpeg,png,svg,gif}",
+		"delete": true
 	},
 	"copy": {
 		"input": ["src/**/*", "!src/{images,js,sass}", "!src/{images,js,sass}/**/*"],
 		"output": "assets",
-		"watch": ["src/**/*","!src/{images,js,scss}", "!src/{images,js,sass}/**/*"]
+		"watch": ["src/**/*","!src/{images,js,scss}", "!src/{images,js,sass}/**/*"],
+		"delete": true
 	},
 	"scripts": {
 		"input": ["src/js/app.js", "src/js/admin.js"],
 		"output": "assets/js",
-		"watch": "src/js/**/*.js"
+		"watch": "src/js/**/*.js",
+		"delete": true
 	},
 	"icons": {
 		"input": "src/icons/**/*.svg",
 		"output": "assets/icons",
-		"watch": "src/icons/**/*.svg"
+		"watch": "src/icons/**/*.svg",
+		"delete": true
 	}
 }

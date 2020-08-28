@@ -38,7 +38,18 @@ const generateDirectories = (object) => {
 
 generateDirectories(dirs);
 
-export const clean = () => del(dirs.assets, {force: true});
+export const clean = () => {
+	for (let assetType in dirs) {
+		if (typeof dirs[assetType].delete !== 'undefined' && dirs[assetType].delete) {
+			del([
+				path.join(dirs[assetType].output, '**'),
+				path.join('!', dirs[assetType].output)
+			], {force: true});
+		}
+	}
+	
+	return Promise.resolve(true);
+};
 
 export const styles = () => {
 	if (!dirs.styles) {
