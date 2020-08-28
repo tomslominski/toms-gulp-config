@@ -25,15 +25,15 @@
     "defaults"
   ],
   "dependencies": {
-    "@babel/core": "^7.8.7",
-    "@babel/preset-env": "^7.8.7",
-    "@babel/register": "^7.8.6",
-    "@ianwalter/merge": "^7.0.0",
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/register": "^7.10.5",
+    "@ianwalter/merge": "^9.0.1",
     "autoprefixer": "^9.7.4",
     "colors": "^1.4.0",
     "del": "^5.1.0",
     "esm": "^3.2.25",
-    "fibers": "^4.0.2",
+    "fibers": "^5.0.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^4.3.0",
@@ -44,6 +44,6 @@
     "gulp-postcss": "^8.0.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
-    "sass": "^1.26.3"
+    "sass": "^1.26.10"
   }
 }
