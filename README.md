@@ -36,30 +36,4 @@ Other files not mentioned above are copied from `src/` into `assets/`.
 
 ## Config
 
-Alternatively, if these default directories do not suit your project, you can create a gulp-config.json file in your project's root directory to override the defaults, in the following format (includes all default settings, you can remove these if you don't want to override them):
-
-```
-{
-  input: {
-    styles: ['src/sass/style.scss', 'src/sass/admin.scss'],
-    images: 'src/images/**/*.{jpg,jpeg,png,svg,gif}',
-    copy: ['src/**/*', '!src/{images,js,sass}', '!src/{images,js,sass}/**/*'],
-    scripts: ['src/js/app.js', 'src/js/admin.js'],
-    icons: 'src/icons/**/*.svg'
-  },
-  output: {
-    styles: 'assets/css',
-    images: 'assets/images',
-    copy: 'assets',
-    scripts: 'assets/js',
-    icons: 'assets/icons'
-  },
-  watch: {
-    styles: 'src/sass/**/*.scss',
-    images: 'src/images/**/*.{jpg,jpeg,png,svg,gif}',
-    copy: ['src/**/*','!src/{images,js,scss}', '!src/{images,js,sass}/**/*'],
-    scripts: 'src/js/**/*.js',
-    icons: 'src/icons/**/*.svg'
-  }
-}
-```
+Alternatively, if these default directories do not suit your project, you can copy the [gulp-config.json](gulp-config.json) file to your project's root directory to override the defaults. Change any directory name, or set it to false to disable that module.
