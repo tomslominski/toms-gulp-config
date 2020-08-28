@@ -18,7 +18,7 @@ if (typeof packageFile.name === 'undefined') {
 	return;
 }
 
-if (typeof packageFile.scripts.watch !== 'undefined' || typeof packageFile.scripts.dev !== 'undefined' || typeof packageFile.scripts.prod !== 'undefined') {
+if (typeof packageFile.scripts !== 'undefined' && ( typeof packageFile.scripts.watch !== 'undefined' || typeof packageFile.scripts.dev !== 'undefined' || typeof packageFile.scripts.prod !== 'undefined' )) {
 	console.warn('The scripts this package requires have already been defined in your package.json file. Please override them manually if you wish.'.red);
 	return;
 }
