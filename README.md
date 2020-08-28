@@ -36,4 +36,4 @@ Other files not mentioned above are copied from `src/` into `assets/`.
 
 ## Config
 
-Alternatively, if these default directories do not suit your project, you can copy the [gulp-config.json](gulp-config.json) file to your project's root directory to override the defaults. Change any directory name, or set it to false to disable that module.
+Alternatively, if these default directories do not suit your project, you can copy the [gulp-config.json](gulp-config.json) file to your project's root directory to override the defaults. Change any directory name, or set it to `false` to disable that module.
