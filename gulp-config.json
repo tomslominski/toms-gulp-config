@@ -14,7 +14,7 @@
 	"copy": {
 		"input": ["src/**/*", "!src/{images,js,sass}", "!src/{images,js,sass}/**/*"],
 		"output": "assets",
-		"watch": ["src/**/*","!src/{images,js,scss}", "!src/{images,js,sass}/**/*"],
+		"watch": ["src/**/*","!src/{images,js,scss,icons}", "!src/{images,js,sass,icons}/**/*"],
 		"delete": true
 	},
 	"scripts": {
