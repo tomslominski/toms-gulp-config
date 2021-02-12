@@ -39,23 +39,25 @@ const generateDirectories = (object) => {
 generateDirectories(dirs);
 
 export const clean = () => {
+	let cleanDirs = [];
+
 	for (let assetType in dirs) {
 		if (typeof dirs[assetType].delete !== 'undefined' && dirs[assetType].delete) {
-			del([
+			cleanDirs = cleanDirs.concat([
 				path.join(dirs[assetType].output, '**'),
 				path.join('!', dirs[assetType].output)
-			], {force: true});
+			]);
 		}
 	}
-	
-	return Promise.resolve(true);
+
+	return del(cleanDirs, {force: true});
 };
 
 export const styles = () => {
 	if (!dirs.styles) {
 		return Promise.resolve(false);
 	}
-	
+
 	return src(dirs.styles.input, {allowEmpty: true})
 	.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
 	.pipe(sass({fiber: fiber}).on('error', sass.logError))
@@ -69,7 +71,7 @@ export const images = () => {
 	if (!dirs.images) {
 		return Promise.resolve(false);
 	}
-	
+
 	return src(dirs.images.input, {allowEmpty: true})
 	.pipe(gulpif(PRODUCTION, imagemin()))
 	.pipe(dest(dirs.images.output));
@@ -79,7 +81,7 @@ export const copy = () => {
 	if (!dirs.copy) {
 		return Promise.resolve(false);
 	}
-	
+
 	return src(dirs.copy.input, {allowEmpty: true})
 	.pipe(dest(dirs.copy.output));
 }
@@ -88,7 +90,7 @@ export const scripts = () => {
 	if (!dirs.scripts) {
 		return Promise.resolve(false);
 	}
-	
+
 	return src(dirs.scripts.input, {allowEmpty: true})
 	.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
 	.pipe(babel({presets: ['@babel/env']}))
@@ -101,7 +103,7 @@ export const icons = () => {
 	if (!dirs.icons) {
 		return Promise.resolve(false);
 	}
-	
+
 	return src(dirs.icons.input, {allowEmpty: true})
 	.pipe(gulpif(PRODUCTION, imagemin()))
 	.pipe(dest(dirs.icons.output));
@@ -112,10 +114,10 @@ export const watchChanges = () => {
 		if (!dirs[task.name]) {
 			return;
 		}
-		
+
 		watch(dirs[task.name].watch, task);
 	});
-	
+
 	return Promise.resolve(false);
 }
 
