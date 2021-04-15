@@ -38,6 +38,19 @@ const generateDirectories = (object) => {
 
 generateDirectories(dirs);
 
+const imageminConfig = [
+	imagemin.svgo({
+		plugins: [
+			{
+				removeViewBox: false
+			}
+		]
+	}),
+	imagemin.gifsicle(),
+	imagemin.mozjpeg(),
+	imagemin.optipng(),
+];
+
 export const clean = () => {
 	let cleanDirs = [];
 
@@ -73,7 +86,7 @@ export const images = () => {
 	}
 
 	return src(dirs.images.input, {allowEmpty: true})
-	.pipe(gulpif(PRODUCTION, imagemin()))
+	.pipe(gulpif(PRODUCTION, imagemin(imageminConfig)))
 	.pipe(dest(dirs.images.output));
 }
 
@@ -105,7 +118,7 @@ export const icons = () => {
 	}
 
 	return src(dirs.icons.input, {allowEmpty: true})
-	.pipe(gulpif(PRODUCTION, imagemin()))
+	.pipe(gulpif(PRODUCTION, imagemin(imageminConfig)))
 	.pipe(dest(dirs.icons.output));
 }
 
