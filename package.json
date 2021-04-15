@@ -24,6 +24,9 @@
   "browserslist": [
     "defaults"
   ],
+  "engines": {
+    "node": ">=14"
+  },
   "dependencies": {
     "@babel/core": "^7.13.15",
     "@babel/preset-env": "^7.13.15",
