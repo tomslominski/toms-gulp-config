@@ -1,6 +1,6 @@
 {
   "name": "toms-gulp-config",
-  "version": "1.2",
+  "version": "1.2.0",
   "description": "Gulp config for projects used for compiling JS, SCSS, and optimising images.",
   "main": "gulpfile.esm.js",
   "scripts": {
