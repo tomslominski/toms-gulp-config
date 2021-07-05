@@ -73,7 +73,7 @@ export const styles = () => {
 
 	return src(dirs.styles.input, {allowEmpty: true})
 	.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
-	.pipe(sass({fiber: fiber}).on('error', sass.logError))
+	.pipe(sass({fiber: fiber, includePaths: [path.join(ROOT, 'node_modules')]}).on('error', sass.logError))
 	.pipe(postcss([ autoprefixer ]))
 	.pipe(gulpif(PRODUCTION, cleanCss()))
 	.pipe(gulpif(!PRODUCTION, sourcemaps.write('.')))
