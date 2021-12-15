@@ -9,11 +9,12 @@ import autoprefixer from 'autoprefixer';
 import imagemin from 'gulp-imagemin';
 import del from 'del';
 import babel from 'gulp-babel';
-import uglify from 'gulp-uglify';
+import terser from 'gulp-terser';
 import fiber from 'fibers';
 import path from 'path';
 import fs from 'fs';
 import merge from '@ianwalter/merge';
+import browserslist from 'browserslist';
 
 const PRODUCTION = yargs.argv.prod;
 const ROOT = process.env.INIT_CWD;
@@ -51,6 +52,10 @@ const imageminConfig = [
 	imagemin.optipng(),
 ];
 
+const browserslistConfig = browserslist.loadConfig({
+	path: ROOT
+}) || ['defaults'];
+
 export const clean = () => {
 	let cleanDirs = [];
 
@@ -74,7 +79,7 @@ export const styles = () => {
 	return src(dirs.styles.input, {allowEmpty: true})
 	.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
 	.pipe(sass({fiber: fiber, includePaths: [path.join(ROOT, 'node_modules')]}).on('error', sass.logError))
-	.pipe(postcss([ autoprefixer ]))
+	.pipe(postcss([ autoprefixer({overrideBrowserslist: browserslistConfig}) ]))
 	.pipe(gulpif(PRODUCTION, cleanCss()))
 	.pipe(gulpif(!PRODUCTION, sourcemaps.write('.')))
 	.pipe(dest(dirs.styles.output));
@@ -106,8 +111,17 @@ export const scripts = () => {
 
 	return src(dirs.scripts.input, {allowEmpty: true})
 	.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
-	.pipe(babel({presets: ['@babel/env']}))
-	.pipe(uglify())
+	.pipe(babel({
+		presets: [
+			[
+				'@babel/env',
+				{
+					targets: browserslistConfig,
+				}
+			]
+		]
+	}))
+	.pipe(terser())
 	.pipe(gulpif(!PRODUCTION, sourcemaps.write('.')))
 	.pipe(dest(dirs.scripts.output));
 }

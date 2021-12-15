@@ -1,6 +1,6 @@
 {
   "name": "toms-gulp-config",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Gulp config for projects used for compiling JS, SCSS, and optimising images.",
   "main": "gulpfile.esm.js",
   "scripts": {
@@ -33,6 +33,7 @@
     "@babel/register": "^7.14.5",
     "@ianwalter/merge": "^9.0.1",
     "autoprefixer": "^10.2.6",
+    "browserslist": "^4.19.1",
     "colors": "^1.4.0",
     "del": "^6.0.0",
     "esm": "^3.2.25",
@@ -46,7 +47,7 @@
     "gulp-imagemin": "^7.1.0",
     "gulp-postcss": "^9.0.0",
     "gulp-sourcemaps": "^3.0.0",
-    "gulp-uglify": "^3.0.2",
+    "gulp-terser": "^2.1.0",
     "postcss": "^8.3.5",
     "sass": "^1.35.1"
   }
